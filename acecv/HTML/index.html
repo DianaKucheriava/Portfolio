@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+
+<html lang="en" class="no-js">
+
+    <head>
+        <meta charset="utf-8"/>
+        <title>Експертна система</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta content="width=device-width, initial-scale=1" name="viewport"/>
+        <meta content="" name="description"/>
+        <meta content="" name="author"/>
+
+        <!-- GLOBAL MANDATORY STYLES -->
+        <link href="http://fonts.googleapis.com/css?family=Hind:300,400,500,600,700" rel="stylesheet" type="text/css">
+        <link href="vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css"/>
+        <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <script type="text/javascript" src=expert.js></script>
+        <script type="text/javascript" src="http://yandex.st/jquery/1.8.3/jquery.min.js"></script>
+        <!-- PAGE LEVEL PLUGIN STYLES -->
+        <link href="css/animate.css" rel="stylesheet">
+        <link href="vendor/swiper/css/swiper.min.css" rel="stylesheet" type="text/css"/>
+
+        <!-- THEME STYLES -->
+        <link href="css/layout.min.css" rel="stylesheet" type="text/css"/>
+<link type="text/css" rel=stylesheet href="1.css"/> 
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="favicon.ico"/>
+    </head>
+    <!-- END HEAD -->
+
+    <!-- BODY -->
+    <body id="body" data-spy="scroll" data-target=".header">
+
+        <!--========== HEADER ==========-->
+        <header class="header navbar-fixed-top">
+            <!-- Navbar -->
+            <nav class="navbar" role="navigation">
+                <div class="container">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="menu-container js_nav-item">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="toggle-icon"></span>
+                        </button>
+
+                        <!-- Logo -->
+                        <div class="logo">
+                            <a class="logo-wrap" href="#body">
+                                <img class="logo-img" src="img/logo.png" alt="Asentus Logo">
+                            </a>
+                        </div>
+                        <!-- End Logo -->
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse nav-collapse">
+                        <div class="menu-container">
+                            <ul class="nav navbar-nav navbar-nav-right">
+                                <li class="js_nav-item nav-item"><a class="nav-item-child nav-item-hover" href="#body">Головна сторінка</a></li>
+                                <li class="js_nav-item nav-item"><a class="nav-item-child nav-item-hover" href="#about">Створення бази знань</a></li>
+                                <li class="js_nav-item nav-item"><a class="nav-item-child nav-item-hover" href="#contact">Автор</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- End Navbar Collapse -->
+                </div>
+            </nav>
+            <!-- Navbar -->
+        </header>
+        <!--========== END HEADER ==========-->
+
+        <!--========== SLIDER ==========-->
+        <div class="promo-block">
+            <div class="container">
+                <div class="row">
+                    
+                    <div class="col-sm-6">
+                         <div id="form">
+    <div class="b-top-bar ">
+
+            <div id=start-test  class="border-radius b-button b-page-shadows b-button-clickable b-page-transition">
+            Почати!
+        </div>
+        <div id=data-format  class="border-radius b-button b-page-shadows b-button-clickable b-page-transition">
+            Визначення статі
+        </div>
+        <div id=data-format  class="test2 border-radius b-button b-page-shadows b-button-clickable b-page-transition">
+            Вибір Спеціальності
+        </div>
+        <div id=data-format  class="test3 border-radius b-button b-page-shadows b-button-clickable b-page-transition">
+            Вибір мови програмування
+        </div>
+       
+       
+        <span id="test-title" class="b-top-bar__title">Створіть власну базу знань або оберіть серед запропонованих вище та натисніть почати.</span>
+    </div>
+    <div class="b-page-main">
+    <br>
+    <p> 
+        <textarea id="test"  class="form-control b-input__area " placeholder="Введіть тест сюди та натисніть почати"></textarea></p>
+      <div id="h2" > 
+      <h1>Експертна система</h1>
+      <br>
+      <p id="p1">Назва бази знань:
+        <input id="inputFileNameToSaveAs" class="form-control border-radius" placeholder="Введіть назву бази знань"></p>
+         <p><button id='n' onclick="saveTextAsFile()" class="b-button b-page-shadows border-radius  b-button-clickable b-page-transition b-button- ">Зберегти базу знань</button></p>
+         <br>
+     <p> Завантажити базу знань:
+     <div class="file-upload">
+     <label title="Натисніть <Редагувати> щоб відкрити файл">
+        <input name="file" type="file" class="form-control" id="fileToLoad" >
+        <span>Виберіть файл</span>
+     </label></div>
+        <button id="nm" title="Редагувати обраний файл" class="b-button b-page-shadows border-radius b-button-clickable " onclick="loadFileAsText()">Редагувати файл</button></p>
+
+               <script type="text/javascript">
+ 
+function saveTextAsFile()
+{
+    var textToSave = document.getElementById("test").value;
+    var textToSaveAsBlob = new Blob([textToSave], {type:"text/plain"});
+    var textToSaveAsURL = window.URL.createObjectURL(textToSaveAsBlob);
+    var fileNameToSaveAs = document.getElementById("inputFileNameToSaveAs").value;
+ 
+    var downloadLink = document.createElement("a");
+    downloadLink.download = fileNameToSaveAs;
+    downloadLink.innerHTML = "Download File";
+    downloadLink.href = textToSaveAsURL;
+    downloadLink.onclick = destroyClickedElement;
+    downloadLink.style.display = "none";
+    document.body.appendChild(downloadLink);
+ 
+    downloadLink.click();
+}
+ 
+function destroyClickedElement(event)
+{
+    document.body.removeChild(event.target);
+}
+ 
+function loadFileAsText()
+{
+    var fileToLoad = document.getElementById("fileToLoad").files[0];
+ 
+    var fileReader = new FileReader();
+    fileReader.onload = function(fileLoadedEvent) 
+    {
+        var textFromFileLoaded = fileLoadedEvent.target.result;
+        document.getElementById("test").value = textFromFileLoaded;
+    };
+    fileReader.readAsText(fileToLoad, "UTF-8");
+}
+ 
+</script>
+ 
+        <div class="b-page-test-switch left-side">
+
+        </div></div>
+    </div>
+     <div class="b-page-test hide ">
+         <div class="b-page-test-items left-side">
+         </div>
+
+         <div class="b-page-questions left-side">
+             <div id="answers" class="b-page-questions__answers border-radius">
+
+             </div>
+             <div id=current-question class="b-page-questions__current border-radius">Поточне питання!</div>
+              <label class="control-label" for="current-answer"><p><font color="DarkCyan">Введіть сюди відповідь</font></label>
+
+             <input type="text" id=current-answer class="b-page-questions__answer" value="50" placeholder="Імовірність" title="Введіть значення від 0 (ні) до 1 (так). Якщо ви не знаєте 0.5" />
+
+             <div id=complete-answer  class="b-button b-page-shadows border-radius b-page-transition b-button-clickable">
+                 Відповісти!
+             </div>
+         </div>
+     </div>
+     </div>
+    
+                    </div>
+                </div>
+                <!--// end row -->
+            </div>
+        </div>
+        <!--========== SLIDER ==========-->
+
+        <!--========== PAGE LAYOUT ==========-->
+        <!-- About -->
+        <div id="about">
+            <div class="container content-lg">
+                <div class="row">
+                    <div class="col-sm-5 sm-margin-b-60">
+                        <img  width="230" height="500" src="img/200x300/01.jpg" alt="Image">
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="section-seperator margin-b-50">
+                            <div class="margin-b-50">
+                                <div class="margin-b-30">
+                                    <h2>Створення бази знань:</h2>
+<p id="h3"><br>В першому рядку пишеться назва бази знань.<br> Потім через знак переводу рядка - список питань.<br>Після питань - йде список подій (варіантів)у форматі:<br>Подія(Перевод рядка)
+      Початкова_ймовірність_події номер_питання ймовірність_max ймовірність_min(перевод рядка)<br><br><b>Приклад запису:</b><br>Визначення статі<br>
+      <br>Ви хлопчик?<br>Ви дівчинка?<br><br>Хлопчик<br> 0.5 1) 1 0 2) 0 1<br> Дівчинка<br>0.5 2) 1 0 1) 0 1<br><br>Зверніть увагу, що номера питань можна встановлювати не по порядку + питання що не впливають на ймовірність події можна опускати.</p>
+                                </div>
+                                
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!--// end row -->
+            </div>
+        </div>
+        <!-- End About -->
+
+       
+
+        <!-- Promo Banner -->
+        <div class="promo-banner parallax-window" data-parallax="scroll" data-image-src="img/1920x1080/01.jpg">
+            <div class="container-sm content-lg">
+                <h2 class="promo-banner-title">Результат</h2>
+                <p class="promo-banner-text">Використовуючу дану оболонку експертної системи Ви маєте можливість створити власну базу знань, яка допоможить Вам вирішити те чи інше питання.</p>
+            </div>
+        </div>
+        <!-- End Promo Banner -->
+            
+        <!-- Contact -->
+        <div id="contact">
+            <div class="bg-color-sky-light">
+                <div class="container content-lg">
+                    <div class="row margin-b-40">
+                        <div class="col-sm-6">
+                           <h2>Контакти</h2>
+                            <p>Студентка 4 курсу, Кременчуцького Національного Універсітету імені Михайла Остроградського.</p>
+                        </div>
+                    </div>
+                    <!--// end row -->
+
+                    <div class="row">
+                        <div class="col-md-3 col-xs-6 md-margin-b-30">
+                            <h4>Місцезнаходження</h4>
+                            <a href="#">м. Кременчук, вул. Першотравнева, 20 </a>
+                        </div>
+                        <div class="col-md-3 col-xs-6 md-margin-b-30">
+                            <h4>Телефон</h4>
+                            <a href="#"> 3-60-00</a>
+                        </div>
+                                               <div class="col-md-3 col-xs-6">
+                            <h4>Сайт</h4>
+                            <a href="#">http://www.kdu.edu.ua</a>
+                        </div>
+                    </div>
+                    <!--// end row -->
+                </div>
+            </div>
+        </div>
+        <!-- End Contact -->
+        <!--========== END PAGE LAYOUT ==========-->
+
+        <!--========== FOOTER ==========-->
+        <footer class="footer">
+            <div class="content container">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <img class="footer-logo" src="img/logo.png" alt="Acecv Logo">
+                    </div>
+                    <div class="col-xs-6 text-right sm-text-left">
+                        <p class="margin-b-0"><a class="fweight-700" href="http://keenthemes.com/preview/acecv/">ExS </a>Оболонку експертної системи створила: <a class="fweight-700" href="http://www.keenthemes.com/">Кучерява Діана</a></p>
+                    </div>
+                </div>
+                <!--// end row -->
+            </div>
+        </footer>
+        <!--========== END FOOTER ==========-->
+
+        <!-- Back To Top -->
+        <a href="javascript:void(0);" class="js-back-to-top back-to-top">Top</a>
+
+        <!-- JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
+        <!-- CORE PLUGINS -->
+        <script src="vendor/jquery.min.js" type="text/javascript"></script>
+        <script src="vendor/jquery-migrate.min.js" type="text/javascript"></script>
+        <script src="vendor/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+
+        <!-- PAGE LEVEL PLUGINS -->
+        <script src="vendor/jquery.easing.js" type="text/javascript"></script>
+        <script src="vendor/jquery.back-to-top.js" type="text/javascript"></script>
+        <script src="vendor/jquery.smooth-scroll.js" type="text/javascript"></script>
+        <script src="vendor/jquery.wow.min.js" type="text/javascript"></script>
+        <script src="vendor/jquery.parallax.min.js" type="text/javascript"></script>
+        <script src="vendor/jquery.appear.js" type="text/javascript"></script>
+        <script src="vendor/swiper/js/swiper.jquery.min.js" type="text/javascript"></script>
+
+        <!-- PAGE LEVEL SCRIPTS -->
+        <script src="js/layout.min.js" type="text/javascript"></script>
+        <script src="js/components/progress-bar.min.js" type="text/javascript"></script>
+        <script src="js/components/swiper.min.js" type="text/javascript"></script>
+        <script src="js/components/wow.min.js" type="text/javascript"></script>
+
+    </body>
+    <!-- END BODY -->
+</html>
